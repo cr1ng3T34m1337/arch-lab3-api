@@ -10,7 +10,10 @@
     "password": "db-password",
     "host": "(addr:port)"
   },
-  "apiUrl": "url for api"
+  "api": {
+    "addr": "url-address",
+    "port": "port to run on"
+  }
 }
 ```
 
