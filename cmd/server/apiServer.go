@@ -9,6 +9,7 @@ import (
 type HttpPortNumber int
 
 type ApiServer struct {
+	Addr string
 	Port HttpPortNumber
 
 	HttpHandlers map[string]http.HandlerFunc
@@ -30,7 +31,7 @@ func (s *ApiServer) Start() error {
 	}
 
 	s.server = &http.Server{
-		Addr:    fmt.Sprintf("localhost:%d", s.Port),
+		Addr:    fmt.Sprintf("%s:%d", s.Addr, s.Port),
 		Handler: handler,
 	}
 

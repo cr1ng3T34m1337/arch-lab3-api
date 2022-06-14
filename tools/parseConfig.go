@@ -12,7 +12,10 @@ type Config struct {
 		Password string `json:"password"`
 		Host     string `json:"host"`
 	} `json:"db"`
-	ApiUrl string `json:"apiUrl"`
+	Api struct {
+		Addr string `json:"addr"`
+		Port int    `json:"port"`
+	} `json:"api"`
 }
 
 func ParseConfig(path string) (*Config, error) {

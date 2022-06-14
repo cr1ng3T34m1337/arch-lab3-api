@@ -1,19 +1,13 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 
 	"github.com/cr1ng3T34m1337/arch-lab3-api/db"
 	"github.com/cr1ng3T34m1337/arch-lab3-api/tools"
 )
 
-var (
-	portNum = flag.Int("p", 8080, "http port to be run on")
-)
-
 func main() {
-	flag.Parse()
 	config, err := tools.ParseConfig("config.json")
 	if err != nil {
 		panic(err)
@@ -25,7 +19,7 @@ func main() {
 		Password: config.Db.Password,
 		Host:     config.Db.Host,
 	}
-	apiServer, err := ComposeApiServer(conn, HttpPortNumber(*portNum))
+	apiServer, err := ComposeApiServer(conn, config.Api.Addr, HttpPortNumber(config.Api.Port))
 	if err != nil {
 		panic(err)
 	}

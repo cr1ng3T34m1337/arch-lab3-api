@@ -10,12 +10,12 @@ import (
 	"github.com/google/wire"
 )
 
-func ComposeApiServer(connectionConfig *db.Connection, port HttpPortNumber) (*ApiServer, error) {
+func ComposeApiServer(connectionConfig *db.Connection, addr string, port HttpPortNumber) (*ApiServer, error) {
 	wire.Build(
 		db.DbProvider,
 		dataProviders.StoreProvider,
 		httpHandlers.HandlersProvider,
-		wire.Struct(new(ApiServer), "Port", "HttpHandlers"),
+		wire.Struct(new(ApiServer), "Addr", "Port", "HttpHandlers"),
 	)
 	return nil, nil
 }

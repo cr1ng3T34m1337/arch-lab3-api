@@ -14,7 +14,8 @@ func main() {
 		log.Fatal("Cannot read config: ", err)
 	}
 
-	client := &sdk.Client{BaseUrl: config.ApiUrl}
+	base := fmt.Sprintf("http://%s:%d", config.Api.Addr, config.Api.Port)
+	client := &sdk.Client{BaseUrl: base}
 
 	fmt.Println("=== Scenario 1 ===")
 	balancers, err := client.ListBalancers()

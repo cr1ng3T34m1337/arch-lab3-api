@@ -14,7 +14,7 @@ import (
 
 // Injectors from wire.go:
 
-func ComposeApiServer(connectionConfig *db.Connection, port HttpPortNumber) (*ApiServer, error) {
+func ComposeApiServer(connectionConfig *db.Connection, addr string, port HttpPortNumber) (*ApiServer, error) {
 	sqlDB, err := db.DbProvider(connectionConfig)
 	if err != nil {
 		return nil, err
@@ -22,6 +22,7 @@ func ComposeApiServer(connectionConfig *db.Connection, port HttpPortNumber) (*Ap
 	store := dataProviders.StoreProvider(sqlDB)
 	v := httpHandlers.HandlersProvider(store)
 	apiServer := &ApiServer{
+		Addr:         addr,
 		Port:         port,
 		HttpHandlers: v,
 	}
